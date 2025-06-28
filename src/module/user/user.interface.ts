@@ -24,4 +24,4 @@ export interface IPatient {
   createdAt?: Date;
 }
 
-export type UserRole = 'Admin' | 'Doctor' | 'Patient';
+export type UserRole = 'admin' | 'doctor' | 'patient';
