@@ -5,7 +5,6 @@ import httpStatus from 'http-status';
 import { DoctroService } from './service.service';
 
 
-
 const addService = catchAsync(async (req, res) => {
     const doctorId = (req as any).user.id;
 
