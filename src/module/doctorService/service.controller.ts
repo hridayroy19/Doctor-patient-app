@@ -23,6 +23,35 @@ const addService = catchAsync(async (req, res) => {
     });
 });
 
+
+const updateService = catchAsync(async (req, res) => {
+    const id = req.params.id;
+    const result = await DoctroService.updateServiceDb(id, req.body);
+
+    sendResponse(res, {
+        status: true,
+        statusCode: httpStatus.OK,
+        message: 'Service updated successfully',
+        data: result,
+    });
+});
+
+const deleteService = catchAsync(async (req, res) => {
+    const id = req.params.id;
+    const result = await DoctroService.deleteSeriviceDb(id);
+
+    sendResponse(res, {
+        status: true,
+        statusCode: httpStatus.OK,
+        message: 'Service deleted successfully',
+        data: result,
+    });
+});
+
+
+
 export const ServiceDoctor = {
-    addService
+    addService,
+    updateService,
+    deleteService
 }
