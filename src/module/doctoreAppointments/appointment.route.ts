@@ -8,4 +8,7 @@ const appointmentrouter = express.Router();
 appointmentrouter.post('/appointments', auth('patient'), AppointmentController.bookAppointment);
 appointmentrouter.get('/patient/appointments', auth('patient'), AppointmentController.getPatientAppointments);
 
+appointmentrouter.patch('/doctor/appointments/:id/status',auth('doctor'),AppointmentController.appointmentStatusUpdate);
+
+
 export default appointmentrouter;

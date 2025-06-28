@@ -37,7 +37,34 @@ const getPatientAppointments = catchAsync(async (req, res) => {
 })
 
 
+const appointmentStatusUpdate = catchAsync(async (req, res) => {
+
+    const doctorId = (req as any).user.id;
+    const appointmentId = req.params.id;
+    const { status } = req.body;
+    if (!['accepted', 'cancelled', 'completed'].includes(status)) {
+        res.status(400).json({
+            success: false,
+            message: 'Invalid status',
+        });
+    }
+
+    const updatedAppointment = await AppointmentService.updateAppointmentStatusDb(
+        doctorId,
+        appointmentId,
+        status
+    )
+    sendResponse(res, {
+        status: true,
+        statusCode: httpStatus.CREATED,
+        message: 'Appointment status updated',
+        data: updatedAppointment,
+    })
+})
+
+
 export const AppointmentController = {
     bookAppointment,
-    getPatientAppointments
+    getPatientAppointments,
+    appointmentStatusUpdate
 }
