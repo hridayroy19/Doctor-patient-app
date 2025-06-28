@@ -6,7 +6,13 @@ const getDoctoreDb = async () => {
   return result
 }
 
+const getSingleDoctoreIdDb = async (id: string) => {
+  const result = await Doctor.findById(id)
+  return result
+}
+
 
 export const userService = {
-  getDoctoreDb
+  getDoctoreDb,
+  getSingleDoctoreIdDb
 }
