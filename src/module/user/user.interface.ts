@@ -7,6 +7,7 @@ export interface IDoctor {
   hospitalName: string;
   hospitalFloor: string;
   role?: 'doctor';
+  userStatus: "active" | "inactive"
   createdAt?: Date;
 }
 
@@ -19,5 +20,8 @@ export interface IPatient {
   age: number;
   gender: 'male' | 'female' | 'other';
   role?: 'patient';
+  userStatus: "active" | "inactive"
   createdAt?: Date;
 }
+
+export type UserRole = 'Admin' | 'Doctor' | 'Patient';

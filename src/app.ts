@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import userRouter from './module/user/user.router'
+import authRoute from './module/auth/auth.route'
 
 const app = express()
 
@@ -7,7 +7,7 @@ const app = express()
 app.use(express.json())
 
 // router
-app.use('/auth', userRouter)
+app.use('/auth', authRoute)
 
 
 app.get('/', (req: Request, res: Response) => {
