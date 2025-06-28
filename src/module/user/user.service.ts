@@ -1,11 +1,12 @@
+import { Doctor } from "./doctor.model"
 
 
-// const getUser = async () => {
-//   const result = await User.find()
-//   return result
-// }
+const getDoctoreDb = async () => {
+  const result = await Doctor.find()
+  return result
+}
 
 
 export const userService = {
-  // getUser,
+  getDoctoreDb
 }

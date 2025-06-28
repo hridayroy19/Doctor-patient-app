@@ -3,6 +3,7 @@ import express, { NextFunction, Request, Response } from 'express'
 import authRoute from './module/auth/auth.route'
 import Doctorouter from './module/doctorService/service.route'
 import availabilityrouter from './module/doctorAvailability/availability.route'
+import userRouter from './module/user/user.router';
 
 const app = express()
 
@@ -10,6 +11,7 @@ const app = express()
 app.use(express.json())
 
 // router
+app.use('/', userRouter)
 app.use('/auth', authRoute)
 
 // doctore route
