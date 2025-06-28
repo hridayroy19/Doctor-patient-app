@@ -25,6 +25,19 @@ const createAppointment = async (payload: {
   return appointment;
 };
 
+
+
+const getPatientAppointments = async (patientId: string) => {
+  const appointments = await Appointment.find({ patientId })
+    .populate('doctorId', 'name specialization hospitalName hospitalFloor')
+    .populate('serviceId', 'title description price duration')
+    .lean();
+
+  return appointments;
+};
+
+
 export const AppointmentService = {
   createAppointment,
+   getPatientAppointments,
 };

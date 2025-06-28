@@ -6,6 +6,6 @@ const appointmentrouter = express.Router();
 
 // Patient must be logged in to book
 appointmentrouter.post('/appointments', auth('patient'), AppointmentController.bookAppointment);
-appointmentrouter.get('/patient/appointments', auth('patient'), AppointmentController.bookAppointment);
+appointmentrouter.get('/patient/appointments', auth('patient'), AppointmentController.getPatientAppointments);
 
 export default appointmentrouter;

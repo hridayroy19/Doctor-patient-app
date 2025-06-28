@@ -24,6 +24,20 @@ const bookAppointment = catchAsync(async (req, res) => {
     })
 })
 
+const getPatientAppointments = catchAsync(async (req, res) => {
+    const patientId = (req as any).user.id;
+
+    const appointments = await AppointmentService.getPatientAppointments(patientId);
+    sendResponse(res, {
+        status: true,
+        statusCode: httpStatus.CREATED,
+        message: 'appointments',
+        data: appointments,
+    })
+})
+
+
 export const AppointmentController = {
-    bookAppointment
+    bookAppointment,
+    getPatientAppointments
 }
