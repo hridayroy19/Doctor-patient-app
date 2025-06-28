@@ -4,6 +4,7 @@ import authRoute from './module/auth/auth.route'
 import Doctorouter from './module/doctorService/service.route'
 import availabilityrouter from './module/doctorAvailability/availability.route'
 import userRouter from './module/user/user.router';
+import appointmentrouter from './module/doctoreAppointments/appointment.route';
 
 const app = express()
 
@@ -17,6 +18,7 @@ app.use('/auth', authRoute)
 // doctore route
 app.use('/doctor', Doctorouter)
 app.use('/doctor',availabilityrouter)
+app.use('/',appointmentrouter)
 
 
 app.get('/', (req: Request, res: Response) => {

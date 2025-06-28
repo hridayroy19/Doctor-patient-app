@@ -21,7 +21,7 @@ const getDoctore = catchAsync(async (req, res) => {
   sendResponse(res, {
     status: true,
     statusCode: httpStatus.CREATED,
-    message: 'Doctore getting successfully',
+    message: 'single Doctore getting ',
     data: result,
   })
 })
