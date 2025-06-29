@@ -58,4 +58,4 @@ Bcrypt_salt_Rounds=
 
 API Testing:
 Full Postman Collection Included :
-Includes sample data for Doctors, Services, Availability, Appointments
+

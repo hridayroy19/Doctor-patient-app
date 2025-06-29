@@ -5,6 +5,7 @@ import availabilityrouter from './module/doctorAvailability/availability.route'
 import userRouter from './module/user/user.router'
 import appointmentrouter from './module/doctoreAppointments/appointment.route'
 import { globalErrorHandler } from './middlewares/globalErrorHandler'
+import { AdminRoutes } from './module/admin/admin.route'
 
 const app = express()
 
@@ -19,6 +20,8 @@ app.use('/auth', authRoute)
 app.use('/doctor', Doctorouter)
 app.use('/doctor', availabilityrouter)
 app.use('/', appointmentrouter)
+// admin
+app.use('/admin',AdminRoutes)
 
 app.get('/', (req: Request, res: Response) => {
   res.send({
