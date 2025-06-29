@@ -6,23 +6,23 @@ import { Patient } from '../user/pesent.model'
 
 
 const createDoctorDB = async (payload: IDoctor): Promise<IDoctor> => {
-  const result = await Doctor.create(payload)
+    const result = await Doctor.create(payload)
 
-  return result
+    return result
 }
 
 const createPesentDB = async (payload: IPatient): Promise<IPatient> => {
-  const result = await Patient.create(payload)
+    const result = await Patient.create(payload)
 
-  return result
+    return result
 }
 
 const loginIntoDb = async (payload: { email: string; password: string }) => {
     // console.log(payload);
     let user = await Doctor.findOne({ email: payload?.email }).select('+password')
-    
-    if(!user){
-     user = await Patient.findOne({ email: payload?.email }).select('+password')
+
+    if (!user) {
+        user = await Patient.findOne({ email: payload?.email }).select('+password')
 
     }
 
