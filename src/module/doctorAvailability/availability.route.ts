@@ -1,9 +1,13 @@
-import express from 'express';
-import { AvailabilityController } from './availability.controller';
-import auth from '../../middlewares/auth';
+import express from 'express'
+import { AvailabilityController } from './availability.controller'
+import auth from '../../middlewares/auth'
 
-const availabilityrouter = express.Router();
+const availabilityrouter = express.Router()
 
-availabilityrouter.post('/availability',auth("doctor"),AvailabilityController.setAvailability);
+availabilityrouter.post(
+  '/availability',
+  auth('doctor'),
+  AvailabilityController.setAvailability
+)
 
-export default availabilityrouter;
+export default availabilityrouter

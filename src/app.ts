@@ -1,10 +1,10 @@
-import httpStatus  from 'http-status';
-import express, { NextFunction, Request, Response } from 'express'
+import express, { Request, Response } from 'express'
 import authRoute from './module/auth/auth.route'
 import Doctorouter from './module/doctorService/service.route'
 import availabilityrouter from './module/doctorAvailability/availability.route'
-import userRouter from './module/user/user.router';
-import appointmentrouter from './module/doctoreAppointments/appointment.route';
+import userRouter from './module/user/user.router'
+import appointmentrouter from './module/doctoreAppointments/appointment.route'
+import { globalErrorHandler } from './middlewares/globalErrorHandler'
 
 const app = express()
 
@@ -17,9 +17,8 @@ app.use('/auth', authRoute)
 
 // doctore route
 app.use('/doctor', Doctorouter)
-app.use('/doctor',availabilityrouter)
-app.use('/',appointmentrouter)
-
+app.use('/doctor', availabilityrouter)
+app.use('/', appointmentrouter)
 
 app.get('/', (req: Request, res: Response) => {
   res.send({
@@ -28,12 +27,7 @@ app.get('/', (req: Request, res: Response) => {
   })
 })
 
-
-app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
-  res
-    .status(httpStatus.INTERNAL_SERVER_ERROR)
-    .json({ success: false, message: err.message, error: err });
-});
+app.use(globalErrorHandler)
 
 app.use('*', (req: Request, res: Response) => {
   res.status(404).json({

@@ -1,11 +1,10 @@
-import httpStatus from 'http-status';
-import catchAsync from "../../utils/catchAsync"
-import sendResponse from "../../utils/sendResponse"
-import { userService } from "./user.service"
-
+import httpStatus from 'http-status'
+import catchAsync from '../../utils/catchAsync'
+import sendResponse from '../../utils/sendResponse'
+import { userService } from './user.service'
 
 const getAllDoctore = catchAsync(async (req, res) => {
-   const filters = req.query;
+  const filters = req.query
   const result = await userService.getDoctoreDb(filters)
   sendResponse(res, {
     status: true,
@@ -27,8 +26,7 @@ const getDoctore = catchAsync(async (req, res) => {
   })
 })
 
-
 export const userController = {
   getAllDoctore,
-  getDoctore
+  getDoctore,
 }

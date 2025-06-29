@@ -1,6 +1,6 @@
-import { Schema, model } from 'mongoose';
-import { IDoctor } from './user.interface';
-import config from '../../config';
+import { Schema, model } from 'mongoose'
+import { IDoctor } from './user.interface'
+import config from '../../config'
 import bcrypt from 'bcrypt'
 
 const doctorSchema = new Schema<IDoctor>({
@@ -44,8 +44,7 @@ const doctorSchema = new Schema<IDoctor>({
     type: Date,
     default: Date.now,
   },
-});
-
+})
 
 doctorSchema.pre('save', async function (next) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
@@ -63,5 +62,4 @@ doctorSchema.post('save', function (doc, next) {
   next()
 })
 
-
-export const Doctor = model<IDoctor>('Doctor', doctorSchema);
+export const Doctor = model<IDoctor>('Doctor', doctorSchema)
