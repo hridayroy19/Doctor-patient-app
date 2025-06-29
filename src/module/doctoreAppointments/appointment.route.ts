@@ -28,4 +28,9 @@ appointmentrouter.get(
   AppointmentController.getDoctorAppointments
 )
 
+appointmentrouter.get(
+  '/appointments',
+  AppointmentController.appointmentsPaginaton
+)
+
 export default appointmentrouter

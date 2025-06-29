@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Pagination } from '../../builder/paginationHelpers'
 import { Appointment } from './appointment.model'
 
 // create appointment
@@ -83,9 +84,34 @@ const getAppointmentsByDoctorStatus = async (
   return appointments
 }
 
+const getPaginatedAppointments = async (query: any) => {
+  const { page, limit, skip } = Pagination(query)
+
+  const total = await Appointment.countDocuments()
+
+  const appointments = await Appointment.find()
+    .populate('doctorId', 'name email specialization')
+    .populate('patientId', 'name email age')
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit)
+    .lean()
+
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+      totalPages: Math.ceil(total / limit),
+    },
+    data: appointments,
+  }
+}
+
 export const AppointmentService = {
   createAppointment,
   getPatientAppointments,
   updateAppointmentStatusDb,
   getAppointmentsByDoctorStatus,
+  getPaginatedAppointments,
 }

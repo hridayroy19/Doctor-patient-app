@@ -1,9 +1,9 @@
-import express from 'express';
-import { AdminController } from './admin.controller';
-import auth from '../../middlewares/auth';
+import express from 'express'
+import { AdminController } from './admin.controller'
+import auth from '../../middlewares/auth'
 
-const adminrouter = express.Router();
+const adminrouter = express.Router()
 
-adminrouter.get('/dashboard', auth('admin'), AdminController.getDashboardStats);
+adminrouter.get('/dashboard', auth('admin'), AdminController.getDashboardStats)
 
-export const AdminRoutes = adminrouter;
+export const AdminRoutes = adminrouter

@@ -81,9 +81,22 @@ const getDoctorAppointments = catchAsync(async (req, res) => {
   })
 })
 
+const appointmentsPaginaton = catchAsync(async (req, res) => {
+  const result = await AppointmentService.getPaginatedAppointments(req.query)
+
+  sendResponse(res, {
+    status: true,
+    statusCode: httpStatus.OK,
+    message: 'Appointments fetched with pagination successfully',
+    data: result.data,
+    meta: result.meta,
+  })
+})
+
 export const AppointmentController = {
   bookAppointment,
   getPatientAppointments,
   appointmentStatusUpdate,
   getDoctorAppointments,
+  appointmentsPaginaton,
 }

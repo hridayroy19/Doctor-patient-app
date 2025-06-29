@@ -21,7 +21,7 @@ app.use('/doctor', Doctorouter)
 app.use('/doctor', availabilityrouter)
 app.use('/', appointmentrouter)
 // admin
-app.use('/admin',AdminRoutes)
+app.use('/admin', AdminRoutes)
 
 app.get('/', (req: Request, res: Response) => {
   res.send({
