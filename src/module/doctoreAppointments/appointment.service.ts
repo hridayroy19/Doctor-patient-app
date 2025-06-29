@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Appointment } from './appointment.model';
 
+// create appointment
 const createAppointment = async (payload: {
     doctorId: string;
     patientId: string; serviceId: string; selectedDate: string; timeSlot: string;

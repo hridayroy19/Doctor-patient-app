@@ -1,11 +1,37 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Availability } from "../doctorAvailability/availability.model";
 import { Service } from "../doctorService/service.model";
 import { Doctor } from "./doctor.model"
 
 
-const getDoctoreDb = async () => {
-  const result = await Doctor.find()
-  return result
+const getDoctoreDb = async (filters: any) => {
+
+  const { hospitalName, specialization, service } = filters;
+
+  const doctorFilter: any = {};
+
+  // Filter by hospital name
+  if (hospitalName) {
+    doctorFilter.hospitalName = { $regex: hospitalName, $options: 'i' };
+  }
+
+  // Filter by specialization
+  if (specialization) {
+    doctorFilter.specialization = { $regex: specialization, $options: 'i' };
+  }
+
+  let doctors = await Doctor.find(doctorFilter).lean();
+  if (service) {
+    const serviceMatched = await Service.find({
+      title: { $regex: service, $options: 'i' },
+    }).select('doctorId');
+
+    const doctorIds = serviceMatched.map((item) => item.doctorId?.toString());
+
+    doctors = doctors.filter((doc) => doctorIds.includes(doc._id.toString()));
+  }
+
+  return doctors;
 }
 
 // const getSingleDoctoreIdDb = async (id: string) => {

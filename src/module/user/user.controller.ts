@@ -5,7 +5,8 @@ import { userService } from "./user.service"
 
 
 const getAllDoctore = catchAsync(async (req, res) => {
-  const result = await userService.getDoctoreDb()
+   const filters = req.query;
+  const result = await userService.getDoctoreDb(filters)
   sendResponse(res, {
     status: true,
     statusCode: httpStatus.CREATED,
