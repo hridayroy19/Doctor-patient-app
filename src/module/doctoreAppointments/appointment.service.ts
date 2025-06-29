@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Appointment } from './appointment.model';
 
 const createAppointment = async (payload: {
@@ -60,10 +61,28 @@ const updateAppointmentStatusDb = async (
     return appointment;
 };
 
+// View all appointment requests:
 
+const getAppointmentsByDoctorStatus = async (doctorId: string, status?: string) => {
+
+    const filter: any = { doctorId };
+    if (status) {
+        filter.status = status;
+    }
+    //  console.log('Filter:', filter);
+
+    const appointments = await Appointment.find(filter)
+        .populate('patientId', 'name email phone age gender')
+        .populate('serviceId', 'title price duration')
+        .lean();
+    // console.log(appointments,"main data")
+
+    return appointments;
+};
 
 export const AppointmentService = {
     createAppointment,
     getPatientAppointments,
-    updateAppointmentStatusDb
+    updateAppointmentStatusDb,
+    getAppointmentsByDoctorStatus
 };

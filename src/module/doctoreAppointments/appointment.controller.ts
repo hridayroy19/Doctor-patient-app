@@ -62,9 +62,35 @@ const appointmentStatusUpdate = catchAsync(async (req, res) => {
     })
 })
 
+// apoinment status pending 
+const getDoctorAppointments = catchAsync(async (req, res) => {
+  const doctorId = (req as any).user.id;
+  const { status } = req.query; 
+//   console.log(status,doctorId, "staussss")
+
+  const appointments = await AppointmentService.getAppointmentsByDoctorStatus(
+    doctorId,
+    status as string
+  );
+
+//   console.log(appointments,'rsult')
+
+  sendResponse(res, {
+    status: true,
+    statusCode: httpStatus.OK,
+    message: 'Doctor appointments fetched successfully',
+    data: appointments,
+  });
+});
+
+
+
+
+
 
 export const AppointmentController = {
     bookAppointment,
     getPatientAppointments,
-    appointmentStatusUpdate
+    appointmentStatusUpdate,
+    getDoctorAppointments
 }
